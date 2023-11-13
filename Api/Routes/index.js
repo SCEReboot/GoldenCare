@@ -6,7 +6,7 @@ const userRouter = require('./user.route')
 
 //definimos las rutas
 
-router.use('/user', userRouter)
+router.use('/', userRouter)
 
 
 module.exports = router

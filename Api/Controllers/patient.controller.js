@@ -43,7 +43,7 @@ async function getOnePatient(req, res) {
 
 
 
-async function updatePatient(req, res){
+async function updatePatient(req, res) {
     try {
         const [patient] = await Patient.update(req.body, {
             where: {id: req.params.id},
@@ -54,7 +54,7 @@ async function updatePatient(req, res){
     }
 } 
 
-async function deletePatient(req, res){
+async function deletePatient(req, res) {
     try {
         const patient = await Patient.destroy({
             where: { id: req.params.id },
@@ -66,4 +66,4 @@ async function deletePatient(req, res){
 }
 
 
-module.exports ={ getAllPatients, getOnePatient, createPatient, updatePatient, deletePatient} 
+module.exports = { getAllPatients, getOnePatient, createPatient, updatePatient, deletePatient } 

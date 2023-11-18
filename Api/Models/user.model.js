@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../Database/index')    //importamos la instancia de sequilize creada en la carpeta database
 
-const User = sequelize.define('user', { // definimos los campos de nuestra tabla en la base de datos con este modelo
+const User = sequelize.define('user', { // definimos los campos de nuestra tabla en la base de datos con 
     first_name:{
         type: DataTypes.STRING
     },
@@ -28,7 +28,7 @@ const User = sequelize.define('user', { // definimos los campos de nuestra tabla
         type: DataTypes.ENUM('admin', 'user', 'caregiver')
     }
 },
-{ 
+{ //opciones
     timestamps: false, // evita que nos cree las columnas updateAt y createAt
 })
 

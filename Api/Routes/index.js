@@ -3,10 +3,12 @@ const router = require('express').Router() //le indicamos que vamos a usar el ro
 //importamos los archivos de rutas
 
 const userRouter = require('./user.route')
+const patientRouter = require('./patient.route')
 
-//definimos las rutas
 
-router.use('/', userRouter)
+
+router.use('/user', userRouter)
+router.use('/patient', patientRouter)
 
 
 module.exports = router

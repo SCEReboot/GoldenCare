@@ -18,7 +18,8 @@ function launchServer(){
     .use(cors())
     .use(morgan('dev'))
     .use(express.json())    // permite leer json en el body
-      // http://localhost:3000/api
+    .use('/api', require('./Api/Routes/index.js')) // definimos la ruta de entrada a nuestra api http://localhost:3000/api
+    
     .listen(process.env.SRV_PORT, ()=> {console.log("Server listening: port 3000")})    // definimos la ruta de entrada a nuestra api http://localhost:3000/api
 }
 

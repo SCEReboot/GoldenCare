@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../Database/index')    //importamos la instancia de sequilize creada en la carpeta database
 
-const User = sequelize.define('user', { // definimos los campos de nuestra tabla en la base de datos con este modelo
+const Patient = sequelize.define('patient', { // definimos los campos de nuestra tabla
     first_name:{
         type: DataTypes.STRING
     },
@@ -14,22 +14,32 @@ const User = sequelize.define('user', { // definimos los campos de nuestra tabla
     gender:{
         type: DataTypes.ENUM('male','female', 'other')
     },
-    contact_number:{
-        type: DataTypes.INTEGER
-    },
-    email:{
-        type: DataTypes.STRING,
-        unique: true
-    },
-    password:{
+    blood_type:{
         type: DataTypes.STRING
     },
-    role:{
-        type: DataTypes.ENUM('admin', 'user', 'caregiver')
+    chronic_illnesses:{
+        type: DataTypes.STRING,
+    },
+    allergies:{
+        type: DataTypes.STRING
+    },
+    dietary_type:{
+        type: DataTypes.STRING
+    },
+    mobility_requirements:{
+        type: DataTypes.STRING,
+    },
+    emergency_protocol:{
+        type: DataTypes.STRING
+    },
+    biography:{
+        type: DataTypes.STRING
+    },
+    doctor_contact:{
+        type: DataTypes.INTEGER
     }
 },
-{ 
+{ //opciones
     timestamps: false, // evita que nos cree las columnas updateAt y createAt
 })
-
-module.exports = User
+module.exports = Patient

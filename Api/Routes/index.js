@@ -5,6 +5,8 @@ const router = require('express').Router() //le indicamos que vamos a usar el ro
 router.use('/user', require('./user.route'))
 router.use('/patient', require('./patient.route'))
 router.use('/task', require('./task.route') )
+router.use('/message', require('./message.route'))
+router.use('/activity', require('./actvity.route'))
 
 
 module.exports = router

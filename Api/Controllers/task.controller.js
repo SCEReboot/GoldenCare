@@ -41,8 +41,6 @@ async function getOneTask(req, res) {
     }
 }
 
-
-
 async function updateTask(req, res) {
     try {
         const [ task ] = await Task.update(req.body, {

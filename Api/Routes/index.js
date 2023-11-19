@@ -7,6 +7,7 @@ router.use('/patient', require('./patient.route'))
 router.use('/task', require('./task.route') )
 router.use('/message', require('./message.route'))
 router.use('/activity', require('./actvity.route'))
+router.use('/medicine', require('./medicine.route'))
 
 
 module.exports = router

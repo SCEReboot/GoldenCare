@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../Database/index')    //importamos la instancia de sequilize creada en la carpeta database
 
-const Activity = sequelize.define('activityc', { // definimos los campos de nuestra tabla
+const Activity = sequelize.define('activity', { // definimos los campos de nuestra tabla
     activity_name:{
         type: DataTypes.STRING
     },
@@ -18,7 +18,11 @@ const Activity = sequelize.define('activityc', { // definimos los campos de nues
     completed:{
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    difficulty_level:{
+        type: DataTypes.ENUM('easy','intermediate', 'difficult')
     }
+
     },
     {
         timestamps:false

@@ -1,17 +1,19 @@
 const Message = require('../Models/message.model')
 
+
 async function getAllMessages(req, res) {
     try {
-        const messages = await Message.findAll();
-        res.status(200).json(messages);
+        const messages = await Message.findAll()  
+        res.status(200).json(messages)  
     } catch (error) {
-        console.error('Error al obtener message:', error);
+        console.error('Error al obtener message:', error)  
         res.status(500).json({
             message: 'Error al obtener message',
             error: error.message
-        });
+        })  
     }
 }
+
 
 async function getOneMessage(req, res) {
     console.log({body: req.body, params: req.params, query: req.query})  //consultar lo que nos llega en la request
@@ -27,18 +29,19 @@ async function getOneMessage(req, res) {
 
 async function createMessage(req, res) {
     try {
-        const message = await Message.create(req.body);
+        const message = await Message.create(req.body)  
         res.status(201).json({
             message: "Message created successfully.",
             messageId: message.id
-        });
+        })  
     } catch (error) {
         res.status(400).json({
             message: "Failed to create message.",
             error: error.message
-        });
+        })  
     }
 }
+
 
 async function updateMessage(req, res) {
     try {
@@ -51,6 +54,7 @@ async function updateMessage(req, res) {
         res.status(402).send(error.message)
     }
 } 
+
 
 async function deleteMessage(req, res) {
     try {

@@ -1,5 +1,6 @@
 const User = require('../Models/user.model')
 
+
 async function getAllUsers(req, res){
     try {
         const users = await User.findAll()
@@ -9,6 +10,7 @@ async function getAllUsers(req, res){
         res.status(402).send(error.message)
     }
 }
+
 
 async function getOneUser(req, res) {
     console.log({body: req.body, params: req.params, query: req.query})  //consultar lo que nos llega en la request
@@ -22,8 +24,6 @@ async function getOneUser(req, res) {
 }
 
 
- //****************
-
 async function getProfile(req, res) {              
     console.log(res.locals.user)
     try {
@@ -35,9 +35,8 @@ async function getProfile(req, res) {
     }
 }
 
- //****************
 
- async function createUser(req, res){
+async function createUser(req, res){
 
     try {
         const user = await User.create(req.body)
@@ -47,6 +46,7 @@ async function getProfile(req, res) {
         res.status(402).send(error.message)
     }
 }
+
 
 async function updateUser(req, res){
     try {
@@ -58,6 +58,7 @@ async function updateUser(req, res){
         res.status(402).send(error.message)
     }
 } 
+
 
 async function deleteUser(req, res){
     try {

@@ -1,18 +1,20 @@
 const Patient = require('../Models/patient.model')
 
+
 async function getAllPatients(req, res) {
     try {
-        const patients = await Patient.findAll();
-        console.log('Solicitud recibida:');
-        res.status(200).json(patients);
+        const patients = await Patient.findAll()   
+        console.log('Solicitud recibida:')   
+        res.status(200).json(patients)   
     } catch (error) {
-        console.error('Error al obtener pacientes:', error);
+        console.error('Error al obtener pacientes:', error)   
         res.status(500).json({
             message: 'Error al obtener pacientes',
             error: error.message
-        });
+        })   
     }
 }
+
 
 async function getOnePatient(req, res) {
     console.log({body: req.body, params: req.params, query: req.query})  //consultar lo que nos llega en la request
@@ -25,22 +27,21 @@ async function getOnePatient(req, res) {
     }
 }
 
- //****************
- async function createPatient(req, res) {
+
+async function createPatient(req, res) {
     try {
-        const patient = await Patient.create(req.body);
+        const patient = await Patient.create(req.body)   
         res.status(201).json({
             message: "Patient created successfully",
             patientId: patient.id
-        });
+        })   
     } catch (error) {
         res.status(400).json({
             message: "Failed to create patient",
             error: error.message
-        });
+        })   
     }
 }
-
 
 
 async function updatePatient(req, res) {
@@ -53,6 +54,7 @@ async function updatePatient(req, res) {
         res.status(402).send(error.message)
     }
 } 
+
 
 async function deletePatient(req, res) {
     try {

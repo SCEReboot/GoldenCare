@@ -1,18 +1,20 @@
 const Task = require('../Models/task.model')
 
+
 async function getAllTasks(req, res) {
     try {
-        const tasks = await Task.findAll();
-        console.log('Solicitud recibida:');
-        res.status(200).json(tasks);
+        const tasks = await Task.findAll()   
+        console.log('Solicitud recibida:')   
+        res.status(200).json(tasks)   
     } catch (error) {
-        console.error('Error al obtener tasks:', error);
+        console.error('Error al obtener tasks:', error)   
         res.status(500).json({
             message: 'Error al obtener tasks',
             error: error.message
-        });
+        })   
     }
 }
+
 
 async function getOneTask(req, res) {
     console.log({body: req.body, params: req.params, query: req.query})  //consultar lo que nos llega en la request
@@ -25,21 +27,22 @@ async function getOneTask(req, res) {
     }
 }
 
- //****************
- async function createTask(req, res) {
+
+async function createTask(req, res) {
     try {
-        const task = await Task.create(req.body);
+        const task = await Task.create(req.body)   
         res.status(201).json({
             message: "Task created successfully.",
             taskId: task.id
-        });
+        })   
     } catch (error) {
         res.status(400).json({
             message: "Failed to create task.",
             error: error.message
-        });
+        })   
     }
 }
+
 
 async function updateTask(req, res) {
     try {
@@ -52,6 +55,7 @@ async function updateTask(req, res) {
         res.status(402).send(error.message)
     }
 } 
+
 
 async function deleteTask(req, res){
     try {

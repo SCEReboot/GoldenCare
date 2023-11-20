@@ -40,7 +40,7 @@ async function createUser(req, res){
 
     try {
         const user = await User.create(req.body)
-        res.status(200).send("usuario creado")  //modificar el mensaje
+        res.status(200).send("User created!") 
 
     } catch (error) {
         res.status(402).send(error.message)
@@ -70,6 +70,7 @@ async function deleteUser(req, res){
         res.status(402).send(error.message)
     }
 }
+
 
 
 module.exports = { getAllUsers , getOneUser, getProfile, createUser, updateUser, deleteUser}

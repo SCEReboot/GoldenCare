@@ -25,7 +25,7 @@ const User = sequelize.define('user', { // definimos los campos de nuestra tabla
         type: DataTypes.STRING
     },
     role:{
-        type: DataTypes.ENUM('admin', 'user', 'caregiver')
+        type: DataTypes.ENUM('admin', 'relative', 'nurse')
     }
 },
 { //opciones

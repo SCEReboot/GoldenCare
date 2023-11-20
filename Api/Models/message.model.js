@@ -8,9 +8,6 @@ const Message = sequelize.define('message', { // definimos los campos de nuestra
     photo:{
         type: DataTypes.STRING,
         allowNull: true  // para que que este campo sea opcional 
-    }},
-    {
-        timestamps:true
-    })
+    }})
 
     module.exports = Message

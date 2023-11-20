@@ -6,7 +6,7 @@ const router = require('express').Router()
 
 router.get('/', checkAuth, checkAdmin, getAllPatients) // 
 router.get('/:id', checkAuth, getOnePatient)
-router.post('/', checkAuth, createPatient)
+router.post('/', checkAuth, checkRelative, createPatient)
 router.put('/:id', checkAuth, updatePatient) 
 router.delete('/:id', checkAuth, deletePatient) 
 

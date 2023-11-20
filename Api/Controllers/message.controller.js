@@ -1,4 +1,5 @@
 const Message = require('../Models/message.model')
+const User = require('../Models/user.model')
 
 
 async function getAllMessages(req, res) {
@@ -29,10 +30,11 @@ async function getOneMessage(req, res) {
 
 async function createMessage(req, res) {
     try {
-        const message = await Message.create(req.body)  
+        const user = await User.findByPk(res.locals.user.id)
+        const receiver = await User.findByPk(req.body.receiver)
+        user.addReceiver(receiver, { through: {message_content: req.body.message_content}})
         res.status(201).json({
-            message: "Message created successfully.",
-            messageId: message.id
+            message: "Message created successfully."
         })  
     } catch (error) {
         res.status(400).json({

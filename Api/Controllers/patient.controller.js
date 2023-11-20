@@ -1,5 +1,5 @@
 const Patient = require('../Models/patient.model')
-
+const User = require('../Models/user.model')
 
 async function getAllPatients(req, res) {
     try {
@@ -27,10 +27,20 @@ async function getOnePatient(req, res) {
     }
 }
 
+async function assignPatientNurse(req, res) {
+    try {
+        const user = await User.findByPk(res.body.nurseId)
+        const patient = await Patient.findByPk(req.body.patientId)
+        user.addPatient(patient)
+    }catch (error){
 
+    }
+}
 async function createPatient(req, res) {
     try {
         const patient = await Patient.create(req.body)   
+        const user = await User.findByPk(res.locals.user.id)
+        user.addRelativePatient(patient)
         res.status(201).json({
             message: "Patient created successfully",
             patientId: patient.id

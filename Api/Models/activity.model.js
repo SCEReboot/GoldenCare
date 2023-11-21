@@ -22,7 +22,6 @@ const Activity = sequelize.define('activity', { // definimos los campos de nuest
     difficulty_level:{
         type: DataTypes.ENUM('easy','intermediate', 'difficult')
     }
-
     },
     {
         timestamps:false

@@ -1,5 +1,9 @@
+const Activity = require('../Models/activity.model')
+const Medicine = require('../Models/medicine.model')
 const Patient = require('../Models/patient.model')
-const User = require('../Models/user.model')
+const Task = require('../Models/task.model')
+
+
 
 async function getAllPatients(req, res) {
     try {
@@ -27,32 +31,21 @@ async function getOnePatient(req, res) {
     }
 }
 
-async function assignPatientNurse(req, res) {
-    try {
-        const user = await User.findByPk(res.body.nurseId)
-        const patient = await Patient.findByPk(req.body.patientId)
-        user.addPatient(patient)
-    }catch (error){
 
-    }
-}
 async function createPatient(req, res) {
     try {
-        const patient = await Patient.create(req.body)   
-        const user = await User.findByPk(res.locals.user.id)
-        user.addRelativePatient(patient)
+        const patient = await Patient.create(req.body) 
         res.status(201).json({
-            message: "Patient created successfully",
+            message: "Patient created successfully.",
             patientId: patient.id
-        })   
+        }) 
     } catch (error) {
         res.status(400).json({
-            message: "Failed to create patient",
+            message: "Failed to create patient.",
             error: error.message
-        })   
+        }) 
     }
 }
-
 
 async function updatePatient(req, res) {
     try {
@@ -77,5 +70,31 @@ async function deletePatient(req, res) {
     }
 }
 
+async function getAllPatientData(req, res) {
 
-module.exports = { getAllPatients, getOnePatient, createPatient, updatePatient, deletePatient } 
+    try {
+      
+        const patient   = await Patient.findByPk(res.locals.user.id, {
+          include: [
+            {
+                model: Activity,
+            },
+            {
+                model: Task,
+            },
+            {
+                model:  Medicine,
+            }
+          ],
+        })
+        return res.status(200).json(user) 
+      
+  
+    } catch (error) {
+      res.status(402).send(error.message)
+    }
+}
+
+
+
+module.exports = { getAllPatients, getOnePatient, updatePatient,createPatient, deletePatient, getAllPatientData } 

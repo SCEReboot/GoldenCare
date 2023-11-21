@@ -37,6 +37,9 @@ const Patient = sequelize.define('patient', { // definimos los campos de nuestra
     },
     doctor_contact:{
         type: DataTypes.INTEGER
+    },
+    photo_patient:{
+        type: DataTypes.STRING
     }
 },
 { //opciones

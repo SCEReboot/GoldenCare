@@ -30,7 +30,7 @@ function checkAdmin(req, res, next) {       //checkeamos autorización, si el us
 }
 function checkRelative(req, res, next) {       //checkeamos autorización, si el usuario tiene acceso o no a un recurso
 
-    if (res.locals.user.role !== 'relative') {
+    if (res.locals.user.role !== 'relative' || res.locals.user.role !== 'admin') {
         return res.status(401).send('User not authorized')
 
     } else {

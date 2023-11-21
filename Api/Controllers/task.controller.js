@@ -1,4 +1,6 @@
+const Patient = require('../Models/patient.model')
 const Task = require('../Models/task.model')
+const User = require('../Models/user.model')
 
 
 async function getAllTasks(req, res) {
@@ -17,7 +19,6 @@ async function getAllTasks(req, res) {
 
 
 async function getOneTask(req, res) {
-    console.log({body: req.body, params: req.params, query: req.query})  //consultar lo que nos llega en la request
     try {
         const task = await Task.findByPk(req.params.id)
         if (!task){ res.status(500).send("Task not found!")}
@@ -31,6 +32,11 @@ async function getOneTask(req, res) {
 async function createTask(req, res) {
     try {
         const task = await Task.create(req.body)   
+        const nurse = await User.findByPk(req.body.userId)
+        const patient = await Patient.findByPk(req.body.patientId)
+        await task.setPatient(patient)
+       await task.setUser(nurse)
+      
         res.status(201).json({
             message: "Task created successfully.",
             taskId: task.id

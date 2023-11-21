@@ -25,6 +25,9 @@ function setRelations(){
     Patient.belongsToMany(Medicine, { through: PatientMedicine}) 
     Medicine.belongsToMany(Patient, { through: PatientMedicine})
 
+    Patient.hasMany(Task)
+    Task.belongsTo(Patient)
+
 }
 
 module.exports = { setRelations }

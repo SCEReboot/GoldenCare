@@ -8,8 +8,8 @@ const PatientMedicine = require("../Api/Models/patientMedicine.model")
 
 function setRelations(){
 
-    User.belongsToMany(User, { through: Message, as: 'receiver' })
-
+    User.belongsToMany(User, { through: Message, as: 'receiver',foreignKey: 'senderId', unique: false, otherKey: 'receiverId', unique: false})
+    
     User.belongsToMany(Patient, { through: "patient_nurse"}) 
     Patient.belongsToMany(User, { through: "patient_nurse"})
 

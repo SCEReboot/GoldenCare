@@ -5,9 +5,10 @@ const { route } = require('./user.route')
 
 const router = require('express').Router()
 
-router.get('/:id', checkAuth, getOnePatient)
+
 router.get('/getAllPatientData/:id', checkAuth, getAllPatientData)
 
+router.get('/:id', checkAuth, getOnePatient)
 router.put('/:id', checkAuth, updatePatient) 
 router.delete('/:id', checkAuth,checkRelative, deletePatient) 
 

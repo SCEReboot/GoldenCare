@@ -16,9 +16,12 @@ async function login(req, res) {
         const comparePass = bcrypt.compareSync(req.body.password, user.password)  // comparamos la contraseña enviada sin encriptar con la encriptada en la base de datos
 
         if (comparePass) {
+            const role = user.role
+            const userId = user.id
+            const email = user.email
             const payload = { email: user.email } // información que incluimos en el token
             const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })  // generamos el token
-            return res.status(200).send({ token })
+            return res.status(200).send({ token, role, email, userId })
         } else {
             return res.status(404).json('Error: Email or Password incorrect')
         }
@@ -44,7 +47,7 @@ async function signup(req, res) {
         // Generar un token JWT para el nuevo usuario
         const payload = { email: user.email }
         const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
-        return res.status(200).json({ token })
+        return res.status(200).json({ token, role: user.role })
 
     } catch (error) {
         res.status(500).send(error)

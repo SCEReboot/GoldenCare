@@ -145,9 +145,23 @@ async function createPatient(req, res) {
     }
 }
 
+async function getNurses(req, res) {
+  try {
+
+    const users = await User.findAll();
+
+    const nurses = users.filter(user => user.role === 'nurse');
+
+    console.log("Solicitud recibida:");
+    res.status(200).json(nurses);
+  } catch (error) {
+    res.status(402).send(error.message);
+  }
+}
+
 
 async function assignPatientNurse(req, res) {
-
+  console.log(req.body)
     try {
         const user = await User.findByPk(req.body.userId)
         const patient = await Patient.findByPk(req.body.patientId)
@@ -181,4 +195,5 @@ module.exports = {
   createPatient,
   assignPatientNurse,
   updateOwnProfile,
+  getNurses
 } 

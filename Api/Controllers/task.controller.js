@@ -3,6 +3,25 @@ const Task = require('../Models/task.model')
 const User = require('../Models/user.model')
 
 
+async function getMyTasks(req, res) {//mis tareas
+    try {
+        const tasks = await Task.findAll({
+            where: {
+                userId: res.locals.user.id
+            }
+        })   
+        console.log('Solicitud recibida:')   
+        res.status(200).json(tasks)   
+    } catch (error) {
+        console.error('Error al obtener tasks:', error)   
+        res.status(500).json({
+            message: 'Error al obtener tasks',
+            error: error.message
+        })   
+    }
+}
+
+//new tareas ffrom my
 async function getAllTasks(req, res) {
     try {
         const tasks = await Task.findAll()   
@@ -35,7 +54,7 @@ async function createTask(req, res) {
         const nurse = await User.findByPk(req.body.userId)
         const patient = await Patient.findByPk(req.body.patientId)
         await task.setPatient(patient)
-       await task.setUser(nurse)
+        await task.setUser(nurse)
       
         res.status(201).json({
             message: "Task created successfully.",
@@ -75,4 +94,4 @@ async function deleteTask(req, res){
 }
 
 
-module.exports = { getAllTasks, getOneTask, createTask, updateTask, deleteTask } 
+module.exports = { getMyTasks, getAllTasks, getOneTask, createTask, updateTask, deleteTask } 

@@ -23,11 +23,12 @@ async function getAllPatients(req, res) {
 
 
 async function getOnePatient(req, res) {
-
+        console.log(req.params.id)
     try {
         const patient = await Patient.findByPk(req.params.id)
         if (!patient){ res.status(500).send("Patient not found!")}
         res.status(200).json(patient)
+        console.log(patient)
     } catch (error) {
         res.status(402).send(error.message)
     }

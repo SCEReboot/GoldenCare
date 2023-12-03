@@ -3,16 +3,38 @@ const Task = require('../Models/task.model')
 const User = require('../Models/user.model')
 
 
-async function getMyTasks(req, res) {//mis tareas
-    try {
-        const tasks = await Task.findAll({
-            where: {
-                userId: res.locals.user.id
+async function getTasks(patient){
+    let task =  await Task.findAll({
+        where: {
+            patientId: patient.id
+        }
+    })
+    return task
+}
+
+async function getMyTasks(req, res) {
+
+    if (res.locals.user.role === "nurse") {
+        const user = await User.findByPk(res.locals.user.id)
+        var patients = await user.getPatients()
+    } else {
+        const user = await User.findByPk(res.locals.user.id,{
+            include: {
+                model: Patient,
+                as: "relativePatient"
             }
-        })   
-        console.log('Solicitud recibida:')   
-        res.status(200).json(tasks)   
-    } catch (error) {
+        })
+        var patients = user.relativePatient
+    }
+    const array2 = patients.map(async (patient) => await getTasks(patient))
+    var promiseAll = await Promise.all(array2)
+    
+    try {
+   
+    promiseAll = promiseAll.flat()
+    res.status(200).json(promiseAll)
+}
+     catch (error) {
         console.error('Error al obtener tasks:', error)   
         res.status(500).json({
             message: 'Error al obtener tasks',
@@ -51,10 +73,9 @@ async function getOneTask(req, res) {
 async function createTask(req, res) {
     try {
         const task = await Task.create(req.body)   
-        const nurse = await User.findByPk(req.body.userId)
+        
         const patient = await Patient.findByPk(req.body.patientId)
         await task.setPatient(patient)
-        await task.setUser(nurse)
       
         res.status(201).json({
             message: "Task created successfully.",
@@ -70,6 +91,7 @@ async function createTask(req, res) {
 
 
 async function updateTask(req, res) {
+    console.log(req.body)
     try {
         const [ task ] = await Task.update(req.body, {
             where: {id: req.params.id},

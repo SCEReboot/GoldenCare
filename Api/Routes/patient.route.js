@@ -7,10 +7,11 @@ const router = require('express').Router()
 
 
 router.get('/getAllPatientData/:id', checkAuth, getAllPatientData)
-
+// router.get('/patientData', checkAuth, getAllPatientData )
 router.get('/:id', checkAuth, getOnePatient)
 router.put('/:id', checkAuth, updatePatient) 
 router.delete('/:id', checkAuth,checkRelative, deletePatient) 
+
 
 //  ADMIN
 router.get('/', checkAuth, checkAdmin, getAllPatients) 

@@ -8,9 +8,9 @@ const Patient = sequelize.define('patient', { // definimos los campos de nuestra
     last_name:{
         type: DataTypes.STRING
     },
-    date_of_birth:{
-        type: DataTypes.DATE
-    },
+    // date_of_birth:{
+    //     type: DataTypes.DATE
+    // },
     gender:{
         type: DataTypes.ENUM('male','female', 'other')
     },

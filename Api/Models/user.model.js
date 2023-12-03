@@ -8,9 +8,9 @@ const User = sequelize.define('user', { // definimos los campos de nuestra tabla
     last_name:{
         type: DataTypes.STRING
     },
-    date_of_birth:{
-        type: DataTypes.STRING
-    },
+    // date_of_birth:{
+    //     type: DataTypes.STRING
+    // },
     gender:{
         type: DataTypes.ENUM('male','female', 'other')
     },
